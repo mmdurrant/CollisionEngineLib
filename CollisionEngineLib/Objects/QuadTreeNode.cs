@@ -132,7 +132,7 @@ namespace CollisionEngineLib.Objects
             Items.Add(item.Parent.Name, item);
 
             // Check if this node needs to be partitioned
-            if (!IsPartitioned && Items.Count >= MaxItems)
+            if (!IsPartitioned && Items.Count > MaxItems)
             {
                 Partition();
             }
@@ -201,9 +201,9 @@ namespace CollisionEngineLib.Objects
             IsPartitioned = true;
 
             // Try to push items down to child nodes
-            foreach (KeyValuePair<string, QuadTreePositionItem> pair in Items)
+            foreach (string item in Items.Keys.ToList())
             {
-                PushItemDown(pair.Key);
+                PushItemDown(item);
             }
         }
 

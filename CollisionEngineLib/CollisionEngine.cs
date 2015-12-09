@@ -23,6 +23,7 @@ namespace CollisionEngineLib
         public bool Add(QuadTreePositionItem item)
         {
             if (Items.ContainsKey(item.Parent.Name)) return false;
+            Items.Add(item.Parent.Name, item);
             Level.Insert(item);
             return true;
         }
@@ -49,7 +50,7 @@ namespace CollisionEngineLib
             if (firstNode == null) return false;
             // ReSharper disable once ConvertIfStatementToReturnStatement
             // Resharper is told not to do this because I want the first to happen before the second. If it's not intersecting the node, then i don't care.
-            if (firstNode.Rect.Intersects(Items[secondObject].Rect)) return false;
+            if (!Items[secondObject].Rect.Intersects(firstNode.Rect)) return false;
             return Items[firstObject].Rect.Intersects(Items[secondObject].Rect);
         }
 
@@ -57,6 +58,12 @@ namespace CollisionEngineLib
         {
             Level = new QuadTree(size, maxItems);
             Items = new Dictionary<string, QuadTreePositionItem>();
+        }
+
+        public Vector2 GetPoisitionOfItem(string name)
+        {
+            if (!Items.ContainsKey(name)) throw new Exception("Item does not exist");
+            return Items[name].Position;
         }
     }
 }

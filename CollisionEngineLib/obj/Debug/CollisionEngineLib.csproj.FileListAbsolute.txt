@@ -1,0 +1,16 @@
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\CollisionEngineLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\CollisionEngineLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\MonoGame.Framework.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.XInput.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.RawInput.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\MonoGame.Framework.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.pdb

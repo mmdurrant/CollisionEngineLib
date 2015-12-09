@@ -2,6 +2,10 @@
 {
     public class Collidable
     {
-        public string Name { get; set; } 
+        public Collidable(string name)
+        {
+            Name = name;
+        }
+        public string Name { get; set; }
     }
 }
