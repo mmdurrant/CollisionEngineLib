@@ -164,10 +164,10 @@ namespace CollisionEngineLib.Objects
         /// <returns>Whether or not this rectangle intersects the other</returns>
         public bool Intersects(FRect rect)
         {
-            return ((Contains(rect.TopRight) ||
-                     Contains(rect.BottomLeft) ||
-                     Contains(rect.BottomRight) ||
-                     Contains(rect.TopLeft)));
+            return (TopLeft.X < rect.BottomRight.X &&
+                    BottomRight.X > rect.TopLeft.X &&
+                    TopLeft.Y < rect.BottomRight.Y &&
+                    BottomRight.Y > rect.TopLeft.X);
         }
 
         #endregion
