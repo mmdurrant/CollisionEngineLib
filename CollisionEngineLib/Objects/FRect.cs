@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace CollisionEngineLib.Objects
 {
-[Serializable]
+    [Serializable]
     public struct FRect
     {
         #region Properties
@@ -162,14 +163,34 @@ namespace CollisionEngineLib.Objects
         /// </summary>
         /// <param name="rect">The rectangle to check</param>
         /// <returns>Whether or not this rectangle intersects the other</returns>
-        public bool Intersects(FRect rect)
+        public CollisionResponse Intersects(FRect rect)
         {
-            return (TopLeft.X < rect.BottomRight.X &&
+            bool collision = (TopLeft.X < rect.BottomRight.X &&
                     BottomRight.X > rect.TopLeft.X &&
                     TopLeft.Y < rect.BottomRight.Y &&
                     BottomRight.Y > rect.TopLeft.X);
+            if (collision)
+            {
+                return CheckCollisionDirections(rect);
+            }
+            return new CollisionResponse(false);
         }
 
-        #endregion
+        private CollisionResponse CheckCollisionDirections(FRect rect)
+        {
+            CollisionResponse response = new CollisionResponse(true);
+            if (TopLeft.Y > rect.TopLeft.Y) response.Sides.Add(Direction.North);
+            if (TopLeft.X > rect.TopLeft.X) response.Sides.Add(Direction.West);
+            if (BottomRight.Y < rect.BottomRight.Y) response.Sides.Add(Direction.South);
+            if (BottomRight.X > rect.BottomRight.X) response.Sides.Add(Direction.East);
+            if (response.Sides.Count == 0)
+            {
+                response.Sides.Add(Direction.Inside);
+            }
+            return response;
+        }
+        
+
+    #endregion
     }
 }

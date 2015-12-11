@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="CollisionEngine.cs" />
     <Compile Include="Objects\Collidable.cs" />
+    <Compile Include="Objects\CollisionResponse.cs" />
+    <Compile Include="Objects\Direction.cs" />
     <Compile Include="Objects\FRect.cs" />
     <Compile Include="Objects\QuadTree.cs" />
     <Compile Include="Objects\QuadTreeNode.cs" />

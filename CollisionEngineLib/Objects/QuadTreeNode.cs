@@ -243,9 +243,9 @@ namespace CollisionEngineLib.Objects
         {
             List<QuadTreePositionItem> itemsFound = new List<QuadTreePositionItem>();
             // test the point against this node
-            if (!Rect.Intersects(inRect)) return itemsFound;
+            if (!Rect.Intersects(inRect).Collided) return itemsFound;
             // test the point in each item
-            itemsFound.AddRange(from item in Items where item.Value.Rect.Intersects(inRect) select item.Value);
+            itemsFound.AddRange(from item in Items where item.Value.Rect.Intersects(inRect).Collided select item.Value);
 
             // query all subtrees
             if (!IsPartitioned) return itemsFound;

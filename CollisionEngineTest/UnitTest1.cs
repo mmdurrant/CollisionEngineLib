@@ -53,7 +53,7 @@ namespace CollisionEngineTest
             collisionEngine.Add(firstItem);
             collisionEngine.Add(secondItem);
             collisionEngine.Move(firstItem.Parent.Name, new Vector2(45, 45));
-            Assert.IsTrue(collisionEngine.CheckCollision(firstItem.Parent.Name, secondItem.Parent.Name));
+            Assert.IsTrue(collisionEngine.CheckCollision(firstItem.Parent.Name, secondItem.Parent.Name).Collided);
         }
 
         [TestCase(TestName = "Two objects not colliding returns false")]
@@ -64,7 +64,21 @@ namespace CollisionEngineTest
             QuadTreePositionItem secondItem = new QuadTreePositionItem(new Collidable("second item"), new Vector2(50, 50), new Vector2(10, 10));
             collisionEngine.Add(firstItem);
             collisionEngine.Add(secondItem);
-            Assert.IsFalse(collisionEngine.CheckCollision(firstItem.Parent.Name, secondItem.Parent.Name));
+            Assert.IsFalse(collisionEngine.CheckCollision(firstItem.Parent.Name, secondItem.Parent.Name).Collided);
+        }
+
+        [TestCase(TestName = "When an object collides from the West of another object, collision ")]
+        public void CollideFromNorth_CorrectResponse()
+        {
+            CollisionEngine collisionEngine = new CollisionEngine(new QuadTree(new Vector2(1000, 1000), 1));
+            QuadTreePositionItem firstItem = new QuadTreePositionItem(new Collidable("first item"), new Vector2(0, 0), new Vector2(10, 3));
+            QuadTreePositionItem secondItem = new QuadTreePositionItem(new Collidable("second item"), new Vector2(50, 50), new Vector2(10, 10));
+            collisionEngine.Add(firstItem);
+            collisionEngine.Add(secondItem);
+            collisionEngine.Move(firstItem.Parent.Name, new Vector2(45, 53));
+            CollisionResponse response = collisionEngine.CheckCollision(firstItem.Parent.Name, secondItem.Parent.Name);
+            Assert.IsTrue(response.Sides.Count == 1);
+            Assert.IsTrue(response.Sides.Contains(Direction.West));
         }
         
 

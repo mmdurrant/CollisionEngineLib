@@ -43,14 +43,15 @@ namespace CollisionEngineLib
             return Level.HeadNode.ItemMove(Items[name]);
         }
 
-        public bool CheckCollision(string firstObject, string secondObject)
+        public CollisionResponse CheckCollision(string firstObject, string secondObject)
         {
-            if (!Items.ContainsKey(firstObject) || !Items.ContainsKey(secondObject)) return false;
+            
+            if (!Items.ContainsKey(firstObject) || !Items.ContainsKey(secondObject)) return new CollisionResponse(false);
             QuadTreeNode firstNode = Level.HeadNode.FindItemNode(Items[firstObject]);
-            if (firstNode == null) return false;
+            if (firstNode == null) return new CollisionResponse(false);
             // ReSharper disable once ConvertIfStatementToReturnStatement
             // Resharper is told not to do this because I want the first to happen before the second. If it's not intersecting the node, then i don't care.
-            if (!Items[secondObject].Rect.Intersects(firstNode.Rect)) return false;
+            if (!Items[secondObject].Rect.Intersects(firstNode.Rect).Collided) return new CollisionResponse(false);
             return Items[firstObject].Rect.Intersects(Items[secondObject].Rect);
         }
 
