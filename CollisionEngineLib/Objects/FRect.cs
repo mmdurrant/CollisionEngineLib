@@ -169,11 +169,7 @@ namespace CollisionEngineLib.Objects
                     BottomRight.X > rect.TopLeft.X &&
                     TopLeft.Y < rect.BottomRight.Y &&
                     BottomRight.Y > rect.TopLeft.X);
-            if (collision)
-            {
-                return CheckCollisionDirections(rect);
-            }
-            return new CollisionResponse(false);
+            return collision ? CheckCollisionDirections(rect) : new CollisionResponse(false);
         }
 
         private CollisionResponse CheckCollisionDirections(FRect rect)
@@ -182,10 +178,16 @@ namespace CollisionEngineLib.Objects
             if (TopLeft.Y > rect.TopLeft.Y) response.Sides.Add(Direction.North);
             if (TopLeft.X > rect.TopLeft.X) response.Sides.Add(Direction.West);
             if (BottomRight.Y < rect.BottomRight.Y) response.Sides.Add(Direction.South);
-            if (BottomRight.X > rect.BottomRight.X) response.Sides.Add(Direction.East);
-            if (response.Sides.Count == 0)
+            if (BottomRight.X < rect.BottomRight.X) response.Sides.Add(Direction.East);
+            switch (response.Sides.Count)
             {
-                response.Sides.Add(Direction.Inside);
+                case 0:
+                    response.Sides.Add(Direction.Inside);
+                    break;
+                case 4:
+                    response.Sides.Clear();
+                    response.Sides.Add(Direction.Surround);
+                    break;
             }
             return response;
         }

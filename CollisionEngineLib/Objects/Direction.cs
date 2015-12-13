@@ -2,6 +2,6 @@
 {
     public enum Direction
     {
-        North,South,East,West,None,Inside
+        North,South,East,West,None,Inside,Surround
     }
 }

@@ -66,5 +66,10 @@ namespace CollisionEngineLib
             if (!Items.ContainsKey(name)) throw new Exception("Item does not exist");
             return Items[name].Position;
         }
+
+        public bool DoesItemExist(string name)
+        {
+            return Items.ContainsKey(name);
+        }
     }
 }
