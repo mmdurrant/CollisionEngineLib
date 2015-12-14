@@ -145,5 +145,19 @@ namespace CollisionEngineTest
             Assert.IsTrue(response.Sides.Contains(Direction.Inside));
         }
 
+        [TestCase(TestName = "Using CheckCollisionResponse in junction with Update() will return the correct response")]
+        public void CollisionHappens_Update_CheckForCollision()
+        {
+            CollisionEngine collisionEngine = new CollisionEngine(new QuadTree(new Vector2(1000, 1000), 1));
+            QuadTreePositionItem firstItem = new QuadTreePositionItem(new Collidable("first item"), new Vector2(0, 0), new Vector2(10, 10));
+            QuadTreePositionItem secondItem = new QuadTreePositionItem(new Collidable("second item"), new Vector2(50, 50), new Vector2(10, 10));
+            collisionEngine.Add(firstItem);
+            collisionEngine.Add(secondItem);
+            collisionEngine.Move(firstItem.Parent.Name, new Vector2(45, 45));
+            collisionEngine.Update();
+            CollisionResponse response = collisionEngine.CheckCollisionResponse("first item", "second item");
+            Assert.IsTrue(response.Collided);
+        }
+
     }
 }

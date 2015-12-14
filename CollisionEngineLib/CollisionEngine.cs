@@ -13,6 +13,7 @@ namespace CollisionEngineLib
     public class CollisionEngine
     {
         private Dictionary<string, QuadTreePositionItem> Items = new Dictionary<string, QuadTreePositionItem>();
+        private Dictionary<string, Dictionary<string, CollisionResponse>> collisionList = new Dictionary<string, Dictionary<string, CollisionResponse>>();
         public CollisionEngine(QuadTree level)
         {
             Level = level;
@@ -20,6 +21,47 @@ namespace CollisionEngineLib
 
         private QuadTree Level { get; set; }
 
+        public void Update()
+        {
+            foreach (string item in Items.Keys.ToList())
+            {
+                Dictionary<string,CollisionResponse> list = CheckCollisionsWithObject(item);
+                if (list.Count <= 0) continue;
+                switch (collisionList.ContainsKey(item))
+                {
+                    case true:
+                        foreach (string collidedObject in list.Keys)
+                        {
+                            switch (collisionList[item].ContainsKey(collidedObject))
+                            {
+                                case true:
+                                    collisionList[item][collidedObject] = list[collidedObject];
+                                    break;
+                                case false:
+                                    collisionList[item].Add(collidedObject, list[collidedObject]);
+                                    break;
+                            }
+                        }
+                        break;
+                    case false:
+                        collisionList.Add(item, list);
+                        break;
+                }
+            }
+
+        }
+
+        private Dictionary<string, CollisionResponse> CheckCollisionsWithObject(string objectName)
+        {
+            List<string> items = Items.Keys.ToList();
+            Dictionary<string, CollisionResponse> returnResponse = new Dictionary<string, CollisionResponse>();
+            foreach (string item in items)
+            {
+                CollisionResponse response = CheckCollision(objectName, item);
+                returnResponse.Add(item, response);
+            }
+            return returnResponse;
+        }
         public bool Add(QuadTreePositionItem item)
         {
             if (Items.ContainsKey(item.Parent.Name)) return false;
@@ -53,6 +95,14 @@ namespace CollisionEngineLib
             // Resharper is told not to do this because I want the first to happen before the second. If it's not intersecting the node, then i don't care.
             if (!Items[secondObject].Rect.Intersects(firstNode.Rect).Collided) return new CollisionResponse(false);
             return Items[firstObject].Rect.Intersects(Items[secondObject].Rect);
+        }
+
+        public CollisionResponse CheckCollisionResponse(string firstObject, string secondObject)
+        {
+            if (!Items.ContainsKey(firstObject) || !Items.ContainsKey(secondObject))
+                return new CollisionResponse(false);
+            if (!collisionList.ContainsKey(firstObject)) return new CollisionResponse(false);
+            return !collisionList[firstObject].ContainsKey(secondObject) ? new CollisionResponse(false) : collisionList[firstObject][secondObject];
         }
 
         public void ClearLevel(Vector2 size, int maxItems)
