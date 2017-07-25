@@ -91,7 +91,7 @@ namespace CollisionEngineLib.Objects
         /// <remarks>Checks to see if the world needs resizing and does so if needed</remarks>
         public QuadTreePositionItem Insert(Collidable parent, Vector2 position, Vector2 size)
         {
-            QuadTreePositionItem item = new QuadTreePositionItem(parent, position, size);
+            var item = new QuadTreePositionItem(parent, position, size);
 
             // check if the world needs resizing
             if (!HeadNode.ContainsRect(item.Rect))
@@ -114,7 +114,7 @@ namespace CollisionEngineLib.Objects
         public void Resize(FRect newWorld)
         {
             // Get all of the items in the tree
-            List<QuadTreePositionItem> components = GetAllItems();
+            var components = GetAllItems();
 
             // Destroy the head node
             HeadNode.Destroy();
@@ -124,7 +124,7 @@ namespace CollisionEngineLib.Objects
             HeadNode = new QuadTreeNode(newWorld, MaxItems, Resize);
 
             // Reinsert the items
-            foreach (QuadTreePositionItem m in components)
+            foreach (var m in components)
             {
                 HeadNode.Insert(m);
             }

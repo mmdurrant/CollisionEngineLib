@@ -34,26 +34,49 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WorldMessengerLib\WorldMessengerLib\bin\Release\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.2.1.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WorldMessengerLib\WorldMessengerLib\bin\Release\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WorldMessengerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WorldMessengerLib\WorldMessengerLib\bin\Release\WorldMessengerLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionEngine.cs" />
     <Compile Include="Objects\Collidable.cs" />
+    <Compile Include="Objects\CollisionMessage.cs" />
     <Compile Include="Objects\CollisionResponse.cs" />
     <Compile Include="Objects\Direction.cs" />
     <Compile Include="Objects\FRect.cs" />
+    <Compile Include="Objects\Polygon.cs" />
     <Compile Include="Objects\QuadTree.cs" />
     <Compile Include="Objects\QuadTreeNode.cs" />
     <Compile Include="Objects\QuadTreePositionItem.cs" />
+    <Compile Include="Objects\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ExternalRefs\Newtonsoft.Json.dll" />
+    <Content Include="ExternalRefs\Newtonsoft.Json.xml" />
+    <Content Include="ExternalRefs\RabbitMQ.Client.dll" />
+    <Content Include="ExternalRefs\RabbitMQ.Client.xml" />
+    <Content Include="ExternalRefs\WorldMessengerLib.dll" />
+    <Content Include="ExternalRefs\WorldMessengerLib.pdb" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

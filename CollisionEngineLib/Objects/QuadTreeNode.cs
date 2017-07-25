@@ -127,9 +127,9 @@ namespace CollisionEngineLib.Objects
         {
             // If partitioned, try to find child node to add to
             if (InsertInChild(item)) return;
-            item.Destroy += new QuadTreePositionItem.DestroyHandler(ItemDestroy);
-            item.Move += new QuadTreePositionItem.MoveHandler(ItemMove);
-            Items.Add(item.Parent.Name, item);
+            item.Destroy += ItemDestroy;
+            item.Move += ItemMove;
+            Items.Add(item.Parent.ColliderId, item);
 
             // Check if this node needs to be partitioned
             if (!IsPartitioned && Items.Count > MaxItems)
@@ -179,7 +179,7 @@ namespace CollisionEngineLib.Objects
         /// <param name="i">The index of the item to push up</param>
         public void PushItemUp(string i)
         {
-            QuadTreePositionItem m = Items[i];
+            var m = Items[i];
 
             RemoveItem(i);
             ParentNode.Insert(m);
@@ -191,7 +191,7 @@ namespace CollisionEngineLib.Objects
         protected void Partition()
         {
             // Create the nodes
-            Vector2 midPoint = Vector2.Divide(Vector2.Add(Rect.TopLeft, Rect.BottomRight), 2.0f);
+            var midPoint = Vector2.Divide(Vector2.Add(Rect.TopLeft, Rect.BottomRight), 2.0f);
 
             TopLeftNode = new QuadTreeNode(this, new FRect(Rect.TopLeft, midPoint), MaxItems);
             TopRightNode = new QuadTreeNode(this, new FRect(new Vector2(midPoint.X, Rect.Top), new Vector2(Rect.Right, midPoint.Y)), MaxItems);
@@ -201,7 +201,7 @@ namespace CollisionEngineLib.Objects
             IsPartitioned = true;
 
             // Try to push items down to child nodes
-            foreach (string item in Items.Keys.ToList())
+            foreach (var item in Items.Keys.ToList())
             {
                 PushItemDown(item);
             }
@@ -218,7 +218,7 @@ namespace CollisionEngineLib.Objects
         /// <remarks>ItemsFound is assumed to be initialized, and will not be cleared</remarks>
         public List<QuadTreePositionItem> GetItems(Vector2 point)
         {
-            List<QuadTreePositionItem> itemsFound = new List<QuadTreePositionItem>();
+            var itemsFound = new List<QuadTreePositionItem>();
             // test the point against this node
             if (!Rect.Contains(point)) return itemsFound;
             // test the point in each item
@@ -241,7 +241,7 @@ namespace CollisionEngineLib.Objects
         /// <remarks>ItemsFound is assumed to be initialized, and will not be cleared</remarks>
         public List<QuadTreePositionItem> GetItems(FRect inRect)
         {
-            List<QuadTreePositionItem> itemsFound = new List<QuadTreePositionItem>();
+            var itemsFound = new List<QuadTreePositionItem>();
             // test the point against this node
             if (!Rect.Intersects(inRect).Collided) return itemsFound;
             // test the point in each item
@@ -261,7 +261,7 @@ namespace CollisionEngineLib.Objects
         /// </summary>
         public List<QuadTreePositionItem> GetAllItems()
         {
-            List<QuadTreePositionItem> itemsFound = Items.Select(item => item.Value).ToList();
+            var itemsFound = Items.Select(item => item.Value).ToList();
 
             // query all subtrees
             if (!IsPartitioned) return itemsFound;
@@ -279,7 +279,7 @@ namespace CollisionEngineLib.Objects
         /// <returns>The node containing the item</returns>
         public QuadTreeNode FindItemNode(QuadTreePositionItem item)
         {
-            if (Items.ContainsKey(item.Parent.Name)) return this;
+            if (Items.ContainsKey(item.Parent.ColliderId)) return this;
 
             if (!IsPartitioned) return null;
             QuadTreeNode n = null;
@@ -344,8 +344,8 @@ namespace CollisionEngineLib.Objects
             // Find and remove the item
             if (!Items.ContainsKey(item)) return false;
 
-            Items[item].Move -= new QuadTreePositionItem.MoveHandler(ItemMove);
-            Items[item].Destroy -= new QuadTreePositionItem.DestroyHandler(ItemDestroy);
+            Items[item].Move -= ItemMove;
+            Items[item].Destroy -= ItemDestroy;
             return Items.Remove(item);
         }
         /*
@@ -369,14 +369,14 @@ namespace CollisionEngineLib.Objects
         public bool ItemMove(QuadTreePositionItem item)
         {
             // Find the item
-            if (Items.ContainsKey(item.Parent.Name))
+            if (Items.ContainsKey(item.Parent.ColliderId))
             {
                 // Try to push the item down to the child
-                if (PushItemDown(item.Parent.Name)) return true;
+                if (PushItemDown(item.Parent.ColliderId)) return true;
                 // otherwise, if not root, push up
                 if (ParentNode != null)
                 {
-                    PushItemUp(item.Parent.Name);
+                    PushItemUp(item.Parent.ColliderId);
                 }
                 else if (!ContainsRect(item.Rect))
                 {
@@ -387,7 +387,7 @@ namespace CollisionEngineLib.Objects
                 return true;
             }
             // this node doesn't contain that item, stop notifying it about it
-            item.Move -= new QuadTreePositionItem.MoveHandler(ItemMove);
+            item.Move -= ItemMove;
             return false;
         }
 
@@ -397,7 +397,7 @@ namespace CollisionEngineLib.Objects
         /// <param name="item">The item that is being destroyed</param>
         public bool ItemDestroy(QuadTreePositionItem item)
         {
-            return RemoveItem(item.Parent.Name);
+            return RemoveItem(item.Parent.ColliderId);
         }
 
         #endregion

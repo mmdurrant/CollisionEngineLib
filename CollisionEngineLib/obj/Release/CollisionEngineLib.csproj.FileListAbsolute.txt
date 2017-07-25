@@ -1,0 +1,16 @@
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\CollisionEngineLib.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\CollisionEngineLib.pdb
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\MonoGame.Framework.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.MediaFoundation.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.XAudio2.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.Direct3D11.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.DXGI.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.Direct2D1.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.XInput.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.RawInput.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Release\MonoGame.Framework.xml
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Release\CollisionEngineLib.csprojResolveAssemblyReference.cache
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Release\CollisionEngineLib.dll
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Release\CollisionEngineLib.pdb

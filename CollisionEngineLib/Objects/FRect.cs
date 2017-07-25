@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace CollisionEngineLib.Objects
@@ -8,7 +9,10 @@ namespace CollisionEngineLib.Objects
     public struct FRect
     {
         #region Properties
-
+        // <summary>
+        // Complex polygon for wider collision detection
+        // </summary>
+        public Polygon Polygon { get; set; }
         /// <summary>
         /// The top left of this rectangle
         /// </summary>
@@ -128,6 +132,20 @@ namespace CollisionEngineLib.Objects
         {
             topLeft = topleft;
             bottomRight = bottomright;
+            Polygon = new Polygon();
+            Polygon.Points.Add(new Vector(topLeft));
+            Polygon.Points.Add(new Vector(bottomright.X, topleft.Y));
+            Polygon.Points.Add(new Vector(bottomright));
+            Polygon.Points.Add(new Vector(topleft.X, bottomright.Y));
+            Polygon.BuildEdges();
+        }
+
+        public FRect(Vector2 topleft, Vector2 bottomright, Polygon polygon)
+        {
+            topLeft = topleft;
+            bottomRight = bottomright;
+            Polygon = polygon;
+            Polygon.BuildEdges();
         }
 
         /// <summary>
@@ -141,9 +159,35 @@ namespace CollisionEngineLib.Objects
         {
             topLeft = new Vector2(left, top);
             bottomRight = new Vector2(right, bottom);
+            Polygon = new Polygon();
+            Polygon.Points.Add(new Vector(left, top));
+            Polygon.Points.Add(new Vector(right, top));
+            Polygon.Points.Add(new Vector(right, bottom));
+            Polygon.Points.Add(new Vector(left, bottom)); 
+            Polygon.BuildEdges();
         }
-
+        public FRect(float top, float left, float bottom, float right, Polygon polygon)
+        {
+            topLeft = new Vector2(left, top);
+            bottomRight = new Vector2(right, bottom);
+            Polygon = polygon;
+            Polygon.BuildEdges();
+        }
         #endregion
+
+        public FRect(Polygon polygon)
+        {
+            Polygon = polygon;
+            polygon.BuildEdges();
+            var topBottom = from p in polygon.Points orderby p.Y descending select p;
+            var top = topBottom.Last();
+            var bottom = topBottom.First();
+            var leftRight = from o in polygon.Points orderby o.X descending select o;
+            var right = leftRight.First();
+            var left = leftRight.Last();
+            topLeft = new Vector2(left.X, top.Y);
+            bottomRight = new Vector2(right.X, bottom.Y);
+        }
 
         #region Intersection testing functions
 
@@ -165,16 +209,16 @@ namespace CollisionEngineLib.Objects
         /// <returns>Whether or not this rectangle intersects the other</returns>
         public CollisionResponse Intersects(FRect rect)
         {
-            bool collision = (TopLeft.X < rect.BottomRight.X &&
+            var collision = (TopLeft.X < rect.BottomRight.X &&
                     BottomRight.X > rect.TopLeft.X &&
                     TopLeft.Y < rect.BottomRight.Y &&
-                    BottomRight.Y > rect.TopLeft.X);
+                    BottomRight.Y > rect.TopLeft.Y);
             return collision ? CheckCollisionDirections(rect) : new CollisionResponse(false);
         }
 
         private CollisionResponse CheckCollisionDirections(FRect rect)
         {
-            CollisionResponse response = new CollisionResponse(true);
+            var response = new CollisionResponse(true);
             if (TopLeft.Y > rect.TopLeft.Y) response.Sides.Add(Direction.North);
             if (TopLeft.X > rect.TopLeft.X) response.Sides.Add(Direction.West);
             if (BottomRight.Y < rect.BottomRight.Y) response.Sides.Add(Direction.South);

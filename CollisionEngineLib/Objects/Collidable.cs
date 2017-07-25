@@ -1,11 +1,15 @@
-﻿namespace CollisionEngineLib.Objects
+﻿using System;
+
+namespace CollisionEngineLib.Objects
 {
+    [Serializable]
     public class Collidable
     {
-        public Collidable(string name)
+        public Collidable()
         {
-            Name = name;
+            ColliderId = Guid.NewGuid().ToString();
         }
-        public string Name { get; set; }
+        public string ColliderId { get; }
+
     }
 }

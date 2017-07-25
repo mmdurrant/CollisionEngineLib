@@ -37,14 +37,14 @@ namespace CollisionEngineLib.Objects
         /// <summary>
         /// Handles the move event
         /// </summary>
-        protected void OnMove()
+        protected void OnMove(Vector2 offSet)
         {
             // Update rectangles
             rect.TopLeft = position - (size * .5f);
             rect.BottomRight = position + (size * .5f);
-
+            rect.Polygon.Offset(offSet);
             // Call event handler
-            if (Move != null) Move(this);
+            Move?.Invoke(this);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace CollisionEngineLib.Objects
         /// </summary>
         protected void OnDestroy()
         {
-            if (Destroy != null) Destroy(this);
+            Destroy?.Invoke(this);
         }
 
         #endregion
@@ -72,8 +72,17 @@ namespace CollisionEngineLib.Objects
             get { return position; }
             set
             {
+                var offSet = value - position;
+                if (value.X < 0)
+                {
+                    offSet.X *= -1;
+                }
+                if (value.Y < 0)
+                {
+                    offSet.Y *= -1;
+                }
                 position = value;
-                OnMove();
+                OnMove(offSet);
             }
         }
 
@@ -93,7 +102,7 @@ namespace CollisionEngineLib.Objects
                 size = value;
                 rect.TopLeft = position - (size / 2f);
                 rect.BottomRight = position + (size / 2f);
-                OnMove();
+                OnMove(Vector2.Zero);
             }
         }
 
@@ -136,14 +145,21 @@ namespace CollisionEngineLib.Objects
         /// <param name="size">The size of this item</param>
         public QuadTreePositionItem(Collidable parent, Vector2 position, Vector2 size)
         {
-            this.rect = new FRect(0f, 0f, 1f, 1f);
-
+            this.rect = new FRect(position.Y, position.X, position.Y + size.Y, position.X + size.X);
             this.parent = parent;
             this.position = position;
             this.size = size;
-            OnMove();
+            OnMove(Vector2.Zero);
         }
 
+        public QuadTreePositionItem(Collidable parent, Vector2 position, Polygon polygon)
+        {
+            this.rect = new FRect(polygon);
+            this.parent = parent;
+            this.position = position;
+            this.size = rect.BottomRight;
+            OnMove(Vector2.Zero);
+        }
         #endregion
 
         #region Methods
