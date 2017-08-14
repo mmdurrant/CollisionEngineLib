@@ -107,6 +107,11 @@ namespace CollisionEngineLib
             return Level.HeadNode.ItemMove(Items[name]);
         }
 
+        public void ResizeWorld(Vector2 topLeft, Vector2 size)
+        {
+            Level.Resize(new FRect(topLeft, size));
+        }
+
         public CollisionResponse CheckCollision(string firstObject, string secondObject)
         {
             
