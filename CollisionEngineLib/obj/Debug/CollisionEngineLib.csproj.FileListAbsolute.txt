@@ -33,6 +33,6 @@ C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\
 C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\Newtonsoft.Json.xml
 C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\RabbitMQ.Client.xml
 C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\bin\Debug\WorldMessengerLib.pdb
+C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.csprojResolveAssemblyReference.cache
 C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.dll
 C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.pdb
-C:\Users\TrogdorReborn\Documents\Visual Studio 2017\Projects\CollisionEngineLib\CollisionEngineLib\obj\Debug\CollisionEngineLib.csprojResolveAssemblyReference.cache

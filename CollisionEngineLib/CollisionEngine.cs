@@ -144,5 +144,10 @@ namespace CollisionEngineLib
         {
             return Items.ContainsKey(name);
         }
+
+        public CollisionData GetData()
+        {
+            return new CollisionData {Name = Name, Items = Items.Values.ToList()};
+        }
     }
 }

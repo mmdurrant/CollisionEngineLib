@@ -11,6 +11,7 @@ namespace CollisionEngineLib.Objects
         public Vector MinimumTranslationVector; // The translation to apply to polygon A to push the polygons appart.
     }
 
+    [Serializable]
     public class Polygon
     {
         private List<Vector> points = new List<Vector>();

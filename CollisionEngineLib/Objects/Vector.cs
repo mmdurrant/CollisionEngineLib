@@ -8,6 +8,7 @@ using Point = System.Drawing.Point;
 
 namespace CollisionEngineLib.Objects
 {
+    [Serializable]
     public struct Vector
     {
         public float X;

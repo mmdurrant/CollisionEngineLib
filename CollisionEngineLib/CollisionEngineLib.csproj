@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionData.cs" />
     <Compile Include="CollisionEngine.cs" />
     <Compile Include="Objects\Collidable.cs" />
     <Compile Include="Objects\CollisionMessage.cs" />
